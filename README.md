@@ -106,3 +106,80 @@ The Library API enables easy digital library management, allowing users to brows
   "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzA5NTk0MjEsImV4cCI6MTczMDk2MzAyMSwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0.XSGjnl6_S8TqTdBKYFzhj15tc6qHGplVHPazb2CnZmY"
 }
 ```
+**Error Response**
+- **Access Denied**
+ ```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Access Denied. Only admins can update books."
+  }
+}
+```
+- **Invalid Token**
+```json
+ {
+  "status": "fail",
+  "data": {
+    "Message": "Expired token"
+  }
+}
+```
+- **Database Error**
+```json
+{
+    "status": "fail",
+    "data": {
+        "Message": "Database error message here."
+    }
+}
+```
+### Endpoint 4: Books Update
+- **description:** The Update Book endpoint allows authorized administrators to modify details of an existing book within the Library API.
+- **url:** books/update
+- **method:** POST
+### Example Request
+```json
+{
+  "bookCode": "115UO",
+  "author": "Romelyn",
+  "title": "Love",
+  "genre": "Romance",
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3Mjk0Nzc1MzgsImV4cCI6MTcyOTQ4MTEzOCwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0.9a_p_kWwem2WwgskiSvZjSniQ9QzdTijiRFkDYsEvsQ"
+}
+```
+**Success Response**
+```json
+{
+  "status": "success",
+  "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzA5ODQ3ODIsImV4cCI6MTczMDk4ODM4MiwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0.k5sRzBTA3dCog-Dr6jWpshBdXNDDdY00BDg0d_hohiY"
+}
+```
+**Error Response**
+- **Access Denied**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Access Denied. Only admins can update books."
+  }
+}
+```
+- **Invalid Book Code**
+ ```json
+ {
+  "status": "fail",
+  "data": {
+    "Message": "Invalid Book Code."
+  }
+}
+ ```
+- **Invalid Token**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Token is invalid or outdated."
+  }
+}
+```
