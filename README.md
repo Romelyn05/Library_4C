@@ -183,3 +183,21 @@ The Library API enables easy digital library management, allowing users to brows
   }
 }
 ```
+- **No Fields to update**
+```json
+{
+    "status": "fail",
+    "data": {
+        "Message": "No fields to update."
+    }
+}
+```
+- **Database Error**
+```json
+{
+    "status": "fail",
+    "data": {
+        "Message": "Error message from the database."
+    }
+}
+```
