@@ -76,3 +76,12 @@ The Library API enables easy digital library management, allowing users to brows
   }
 }
 ```
+- **Login Failure**
+```json
+{
+    "status": "fail",
+    "data": {
+        "Message": "Login failed."
+    }
+}
+```
