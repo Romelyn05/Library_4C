@@ -70,6 +70,7 @@ The Library API enables easy digital library management, allowing users to brows
 **Error Response**
 - **Invalid Credentials**
 ```json
+ {
   "status": "fail",
   "data": {
     "Message": "Invalid email or password"
@@ -83,5 +84,25 @@ The Library API enables easy digital library management, allowing users to brows
     "data": {
         "Message": "Login failed."
     }
+}
+```
+### Endpoint 3: Books Add
+- **description:** The Add Book endpoint allows administrators to add a new book to the Library API’s collection. This endpoint requires authentication, and only users with the appropriate permissions (e.g., admin role) can add books.
+- **url:** books/add
+- **method:** POST
+### Example Request
+```json
+{
+  "author":"Romelyn",
+  "title": "Love triangle",
+  "genre": "romcom",
+  "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzA5NTk0MDgsImV4cCI6MTczMDk2MzAwOCwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJhZG1pbiIsImFjY2Vzc19sZXZlbCI6ImFkbWluIn19.8FYtbWnuZi5S8KChTay7htTmf6qRTaGxXWl-ZUpu-sg"
+}
+```
+**Success Response**
+```json
+{
+  "status": "success",
+  "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzA5NTk0MjEsImV4cCI6MTczMDk2MzAyMSwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0.XSGjnl6_S8TqTdBKYFzhj15tc6qHGplVHPazb2CnZmY"
 }
 ```
