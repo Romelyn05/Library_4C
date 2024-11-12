@@ -201,3 +201,58 @@ The Library API enables easy digital library management, allowing users to brows
     }
 }
 ```
+### Endpoint 5: Books Delete
+- **description:** The Delete Book endpoint allows authorized administrators to remove a book from the Library API’s collection. This endpoint is designed to permanently delete book records, ensuring that outdated or incorrect information is removed from the library database.
+- **url:** books/delete
+- **method:** DELETE
+### Example Request
+```json
+{
+  "bookCode": "115UO",
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3Mjk0Nzc2NDksImV4cCI6MTcyOTQ4MTI0OSwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0.a9XuhHqDjbsrr3LzZT4tSySXzA2lHPcHPPqIYSk00-c"
+}
+```
+**Success Response**
+```json
+{
+  "status": "success",
+  "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzEzNzY4MzksImV4cCI6MTczMTM4MDQzOSwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0.iMcFAM9nbZOXncV_jDAzsqgh7za3izNDo2TtcPv6gIw"
+}
+```
+**Error Response**
+- **Access Denied**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Access Denied. Only admins can update books."
+  }
+}
+```
+- **Token Invalid**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Expired token"
+  }
+}
+```
+- **Invalid Book Code**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Invalid Book Code."
+  }
+}
+```
+- **Database Error**
+```json
+{
+    "status": "fail",
+    "data": {
+        "Message": "Error message from the database."
+    }
+}
+```
