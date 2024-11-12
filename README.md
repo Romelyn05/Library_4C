@@ -256,3 +256,189 @@ The Library API enables easy digital library management, allowing users to brows
     }
 }
 ```
+### Endpoint 6: Books Update
+- **description:** The Update Book endpoint allows administrators to edit the details of an existing book within the Library API. 
+- **url:** books/update
+- **method:** POST
+### Example Request
+```json
+{
+  "bookCode": "578IC",
+  "author": "Romelyn",
+  "title": "Love",
+  "genre": "Romcom",
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzA5ODU5NDksImV4cCI6MTczMDk5MzE0OSwiZGF0YSI6eyJ1c2VyaWQiOiI0MyIsIm5hbWUiOiJyb21pIiwiYWNjZXNzX2xldmVsIjoiIn19.0MadPF8XhU-FfymxiScXHFZ4FQXkTm0YNQSpiItNIhk"
+}
+```
+**Success Response**
+```json
+{
+  "status": "success",
+  "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzEzNzc0MTAsImV4cCI6MTczMTM4MTAxMCwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0.kXS7rt-7ftYt37gah4zID9ObCT4DPerwZ9iUTJ_PGMc"
+}
+```
+**Error Response**
+- **Access Denied**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Access Denied. Only admins can update books."
+  }
+}
+```
+- **Token Invalid**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Expired token"
+  }
+}
+```
+- **Invalid Book Code**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Invalid Book Code."
+  }
+}
+```
+- **No Fields to update**
+```json
+{
+    "status": "fail",
+    "data": {
+        "Message": "No fields to update."
+    }
+}
+```
+- **Database Error**
+```json
+{
+    "status": "fail",
+    "data": {
+        "Message": "Error message from the database."
+    }
+}
+```
+### Endpoint 7: Books DisplayAll
+- **description:** The Display All Books endpoint allows users to retrieve a list of all books in the Library API’s collection. 
+- **url:** books/displayAll
+- **method:** GET
+### Example Request
+```json
+{
+  "token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3Mjk0Nzc2MzMsImV4cCI6MTcyOTQ4MTIzMywiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0.0nhw0-eCYPndq2_XnpA8VfpkHbU_jf5QJlYPyYyImJc"
+}
+```
+**Success Response**
+```json
+{
+  "status": "success",
+  "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzEzNzgxNjEsImV4cCI6MTczMTM4MTc2MSwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0._LD3vCZph68qtWghMf52DcykzbpC8A5i9IB0oZ27tB4",
+  "data": [
+    {
+      "bookid": "17",
+      "title": "Disguise Affection",
+      "genre": "Romantic",
+      "bookCode": "591IJ",
+      "authorid": "14",
+      "authorname": "Romelyn Celebrados"
+    },
+    {
+      "bookid": "29",
+      "title": "Lust",
+      "genre": "Romantic",
+      "bookCode": "581HS",
+      "authorid": "14",
+      "authorname": "Romelyn Celebrados"
+    }
+  ]
+}
+```
+**Error Response**
+- **Token Invalid**
+```json
+{
+  "status": "fail",
+  "data": {
+    "title": "Expired token"
+  }
+}
+```
+- **Database Error**
+```json
+{
+    "status": "fail",
+    "data": {
+        "Message": "Error message from the database."
+    }
+}
+```
+### Endpoint 8: Books DisplayAuthorsBooks
+- **description:** The Display Author's Books endpoint retrieves a list of all books by a specific author in the Library API’s collection. 
+- **url:** books/displayauthorsbooks
+- **method:** GET
+### Example Request
+```json
+{
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzEzNzkzMDUsImV4cCI6MTczMTM4NjUwNSwiZGF0YSI6eyJ1c2VyaWQiOiI0MyIsIm5hbWUiOiJyb21pIiwiYWNjZXNzX2xldmVsIjoiIn19.Rf8noSqpVfjYb_1uPn_9nV_lSJHVsyvdQyx2B9T6MEY",
+    "authorname": "Romelyn Celebrados"
+}
+```
+**Success Response**
+```json
+{
+  "status": "success",
+  "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzEzNzkzMzUsImV4cCI6MTczMTM4MjkzNSwiZGF0YSI6eyJ1c2VyaWQiOiI0MyIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiIn19.an1JwwFS5SjHUpJIqCqIwI_H5iMzntJR1_r2U_Mn7pk",
+  "data": [
+    {
+      "bookid": "17",
+      "title": "Disguise Affection",
+      "genre": "Romantic",
+      "bookCode": "591IJ",
+      "authorid": "14",
+      "authorname": "Romelyn Celebrados"
+    },
+    {
+      "bookid": "35",
+      "title": "Lust",
+      "genre": "Romantic",
+      "bookCode": "167PY",
+      "authorid": "14",
+      "authorname": "Romelyn Celebrados"
+    }
+  ]
+}
+```
+**Error Response**
+- **Token Invalid**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Token is invalid or outdated."
+  }
+}
+```
+- **No authors Found**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "No such author exists."
+  }
+}
+```
+- **Database Error**
+```json
+{
+    "status": "fail",
+    "data": {
+        "Message": "Error message from the database."
+    }
+}
+```
+
