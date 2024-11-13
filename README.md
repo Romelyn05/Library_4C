@@ -225,7 +225,7 @@ The Library API enables easy digital library management, allowing users to brows
 {
   "status": "fail",
   "data": {
-    "Message": "Access Denied. Only admins can update books."
+    "Message": "Access Denied. Only admins can delete books."
   }
 }
 ```
@@ -256,74 +256,8 @@ The Library API enables easy digital library management, allowing users to brows
     }
 }
 ```
-### Endpoint 6: Books Update
-- **description:** The Update Book endpoint allows administrators to edit the details of an existing book within the Library API. 
-- **url:** books/update
-- **method:** POST
-### Example Request
-```json
-{
-  "bookCode": "578IC",
-  "author": "Romelyn",
-  "title": "Love",
-  "genre": "Romcom",
-  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzA5ODU5NDksImV4cCI6MTczMDk5MzE0OSwiZGF0YSI6eyJ1c2VyaWQiOiI0MyIsIm5hbWUiOiJyb21pIiwiYWNjZXNzX2xldmVsIjoiIn19.0MadPF8XhU-FfymxiScXHFZ4FQXkTm0YNQSpiItNIhk"
-}
-```
-**Success Response**
-```json
-{
-  "status": "success",
-  "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzEzNzc0MTAsImV4cCI6MTczMTM4MTAxMCwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0.kXS7rt-7ftYt37gah4zID9ObCT4DPerwZ9iUTJ_PGMc"
-}
-```
-**Error Response**
-- **Access Denied**
-```json
-{
-  "status": "fail",
-  "data": {
-    "Message": "Access Denied. Only admins can update books."
-  }
-}
-```
-- **Token Invalid**
-```json
-{
-  "status": "fail",
-  "data": {
-    "Message": "Expired token"
-  }
-}
-```
-- **Invalid Book Code**
-```json
-{
-  "status": "fail",
-  "data": {
-    "Message": "Invalid Book Code."
-  }
-}
-```
-- **No Fields to update**
-```json
-{
-    "status": "fail",
-    "data": {
-        "Message": "No fields to update."
-    }
-}
-```
-- **Database Error**
-```json
-{
-    "status": "fail",
-    "data": {
-        "Message": "Error message from the database."
-    }
-}
-```
-### Endpoint 7: Books DisplayAll
+
+### Endpoint 6: Books DisplayAll
 - **description:** The Display All Books endpoint allows users to retrieve a list of all books in the Library API’s collection. 
 - **url:** books/displayAll
 - **method:** GET
@@ -377,15 +311,15 @@ The Library API enables easy digital library management, allowing users to brows
     }
 }
 ```
-### Endpoint 8: Books DisplayAuthorsBooks
-- **description:** The Display Author's Books endpoint retrieves a list of all books by a specific author in the Library API’s collection. 
-- **url:** books/displayauthorsbooks
-- **method:** GET
+### Endpoint 7: Authors Add
+- **description:** The Add Author endpoint allows administrators to add a new author to the library database. 
+- **url:** /authors/update
+- **method:** POST
 ### Example Request
 ```json
 {
-    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzEzNzkzMDUsImV4cCI6MTczMTM4NjUwNSwiZGF0YSI6eyJ1c2VyaWQiOiI0MyIsIm5hbWUiOiJyb21pIiwiYWNjZXNzX2xldmVsIjoiIn19.Rf8noSqpVfjYb_1uPn_9nV_lSJHVsyvdQyx2B9T6MEY",
-    "authorname": "Romelyn Celebrados"
+  "authorname": "Romelyn Celebrados",
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzE0MjA5MDcsImV4cCI6MTczMTQyODEwNywiZGF0YSI6eyJ1c2VyaWQiOiI0MyIsIm5hbWUiOiJyb21pIiwiYWNjZXNzX2xldmVsIjoiIn19.u4oAdXfwZOitYxGzgQdFwGn60VKo_74SyTt4dHNlKvk"
 }
 ```
 **Success Response**
@@ -414,7 +348,26 @@ The Library API enables easy digital library management, allowing users to brows
 }
 ```
 **Error Response**
-- **Token Invalid**
+- **Access Denied**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Access Denied. Only admins can add authors."
+  }
+}
+```
+- **Duplicate Author**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Author already exists."
+  }
+}
+
+```
+- **Token is Invalid or Outdated**
 ```json
 {
   "status": "fail",
@@ -423,22 +376,90 @@ The Library API enables easy digital library management, allowing users to brows
   }
 }
 ```
-- **No authors Found**
+- **Database Connection Error**
 ```json
 {
   "status": "fail",
   "data": {
-    "Message": "No such author exists."
+    "Message": "Database connection error."
   }
 }
 ```
-- **Database Error**
+- **Unexpected Server Error**
 ```json
 {
-    "status": "fail",
-    "data": {
-        "Message": "Error message from the database."
-    }
+  "status": "fail",
+  "data": {
+    "Message": "An unexpected error occurred."
+  }
+}
+```
+### Endpoint 8: Authors Update
+- **description:** This endpoint allows an administrator to update author details in the library database, specifically the author’s name. 
+- **url:** /authors/update
+- **method:** POST
+### Example Request
+```json
+{
+ {
+  "authorid": "17",
+  "authorname": "romelyn",
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzE0NTYxODIsImV4cCI6MTczMTQ1OTc4MiwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJhZG1pbiIsImFjY2Vzc19sZXZlbCI6ImFkbWluIn19.NN2yNh385uuD0ASrk_NVoFiZcWtfF1TNVQdidu_1zKk"
+}
+```
+**Success Response**
+```json
+{
+  "status": "success",
+  "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzE0NTYyMzUsImV4cCI6MTczMTQ1OTgzNSwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0.Fbx8cvmJtzJM0j6UBYC-Jm1YF7GSjGarDitQseewbjI"
+}
+```
+**Error Response**
+- **Access Denied**
+```json
+{
+  "status": "fail",
+  "data": {
+    "title": "Access Denied. Only admins can update books."
+  }
+}
+```
+- **Invalid Author ID**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Invalid Author ID."
+  }
+}
+
+```
+- **No Field to Update**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "No fields to update."
+  }
+}
+```
+- **Token is invalid or Outdated**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Token is invalid or outdated."
+  }
+}
+
+```
+- **Database Connection Error**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Database connection error."
+  }
 }
 ```
 
