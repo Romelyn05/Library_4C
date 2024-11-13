@@ -462,4 +462,235 @@ The Library API enables easy digital library management, allowing users to brows
   }
 }
 ```
+### Endpoint 9: Authors Delete
+- **description:** This endpoint allows an administrator to delete an author from the library database. The endpoint requires a valid JWT token with admin privileges to ensure only authorized users can perform the deletion.
+- **url:** /authors/delete
+- **method:** DELETE
+### Example Request
+```json
+{
+ {
+  "authorid": "17",
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzE0NTYxODIsImV4cCI6MTczMTQ1OTc4MiwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJhZG1pbiIsImFjY2Vzc19sZXZlbCI6ImFkbWluIn19.NN2yNh385uuD0ASrk_NVoFiZcWtfF1TNVQdidu_1zKk"
+}
+```
+**Success Response**
+```json
+{
+  "status": "success",
+  "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzE0NTczMDUsImV4cCI6MTczMTQ2MDkwNSwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0.QiAxMOSOoNG9p0b3xim9l5Cq1PxQd_EdZf-HlMBzznU"
+}
+```
+**Error Response**
+- **Access Denied**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Access Denied. Only admins can update books."
+  }
+}
+```
+- **Invalid Author ID**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Invalid Author ID."
+  }
+}
+```
+- **Token is Invalid or Outdated**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Token is invalid or outdated."
+  }
+}
+```
+- **Database Connection Error**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Database connection error."
+  }
+}
+```
+### Endpoint 10: Authors DisplayAllAuthors
+- **description:** This endpoint allows an authenticated user to view all authors in the library database. A new JWT token is generated upon each successful request to ensure token freshness.
+- **url:** /authors/displayAllAuthors
+- **method:** GET
+### Example Request
+```json
+{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzE0NTg0NDcsImV4cCI6MTczMTQ2MjA0NywiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJhZG1pbiIsImFjY2Vzc19sZXZlbCI6ImFkbWluIn19.TzmAFJK9H2qGd5KENjZm4L7QSC84Q2Kuk2LmaXhV1tc"
+}
 
+```
+**Success Response**
+```json
+{
+  "status": "success",
+  "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzE0NTg0NjAsImV4cCI6MTczMTQ2MjA2MCwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0.s8vWc5kLZWMH5LIYZpWuF-AOl3qMFAuz9WFlpxCovo0",
+  "data": [
+    {
+      "authorid": "14",
+      "authorname": "Romelyn Celebrados"
+    },
+    {
+      "authorid": "18",
+      "authorname": "John Doe"
+    }
+  ]
+}
+```
+**Error Response**
+- **Token Invalid or Expired**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Token is invalid or outdated."
+  }
+}
+```
+- **No Authors Found**
+```json
+{
+  "status": "fail",
+  "Message": "No authors found."
+}
+```
+- **Database Connection Error**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Database connection error."
+  }
+}
+```
+### Endpoint 11: Users Delete
+- **description:** This endpoint allows an admin user to delete a non-admin user account from the system.
+- **url:** /users/delete
+- **method:** DELETE
+### Example Request
+```json
+{
+    "userid": "48", 
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzE0OTgwNjMsImV4cCI6MTczMTUwMTY2MywiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJhZG1pbiIsImFjY2Vzc19sZXZlbCI6ImFkbWluIn19.O5rgJygu6ZaYMXIfbxKVmk_9u2lkhXr49godMSdAxxk"
+}
+
+```
+**Success Response**
+```json
+{
+  "status": "success",
+  "message": "User deleted successfully."
+}
+```
+**Error Response**
+- **Access Denied**
+```json
+{
+  "status": "fail",
+  "data": {
+    "title": "Access Denied. Only admins can delete users."
+  }
+}
+```
+- **User Not Found**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "User not found."
+  }
+}
+```
+- **Admin Account Deletion Not Allowed**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Admin accounts cannot be deleted."
+  }
+}
+```
+- **Database Error**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Database connection error."
+  }
+}
+```
+ ### Endpoint 11: Users DisplayAll
+- **description:** This endpoint allows an admin user to retrieve all non-sensitive details (such as username, email, and creation date) of users in the system.
+- **url:** /users/displayAll
+- **method:** GET
+### Example Request
+```json
+{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzE1MDA2MTMsImV4cCI6MTczMTUwNDIxMywiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJhZG1pbiIsImFjY2Vzc19sZXZlbCI6ImFkbWluIn19.dkcbGzLowkeO1vJ0PpnAUDVX-fqtZdVjySxA8K9xWVE"
+}
+```
+**Success Response**
+```json
+{
+  "status": "success",
+  "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzE1MDA2MzAsImV4cCI6MTczMTUwNDIzMCwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJyb290IiwiYWNjZXNzX2xldmVsIjoiYWRtaW4ifX0.LUVLdzqIac0mzo2wCnl3lHzZPalaXZHdHX_wEJYicW4",
+  "data": [
+    {
+      "username": "admin",
+      "email": "admin@gmail.com",
+      "created_at": "2024-11-13 20:23:33"
+    },
+    {
+      "username": "romi",
+      "email": "romelyn@gmail.com",
+      "created_at": "2024-11-13 19:40:03"
+    }
+  ]
+}
+```
+**Error Response**
+- **Access Denied**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Access Denied. Only admins can view users."
+  }
+}
+```
+- **Token Invalid or Outdated**
+```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Token is invalid or outdated."
+  }
+}
+```
+- **No users Found**
+```json
+{
+  "status": "success",
+  "new_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGlicmFyeS5vcmciLCJhdWQiOiJodHRwOi8vbGlicmFyeS5jb20iLCJpYXQiOjE3MzE1MDA5NTIsImV4cCI6MTczMTUwNDU1MiwiZGF0YSI6eyJ1c2VyaWQiOiI0MiIsIm5hbWUiOiJhZG1pbiIsImFjY2Vzc19sZXZlbCI6ImFkbWluIn19.yKxvcL65QyFC-05DC-2nBP519y6wDn3lLfrozfVYI8U",
+  "Message": "No user account found."
+}
+
+```
+- **Database Error**
+```json
+{
+    "status": "fail",
+    "data": {
+        "Message": "Error message from the database."
+    }
+}
+```
