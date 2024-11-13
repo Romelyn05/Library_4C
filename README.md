@@ -1,9 +1,9 @@
 # Library API Documentation
 ## Introduction
-The Library API enables easy digital library management, allowing users to browse and administrators to organize, view, add, and modify book and author collections. It supports role-based access with authentication, catalog browsing, and search features, making it ideal for integrating library functions into web or mobile applications.
+The Library API provides a system for managing a digital library. It allows users to browse the catalog and enables administrators to organize, view, add, and modify book and author collections. The API supports role-based access control with authentication, catalog browsing, and search features, making it ideal for integrating library functions into web or mobile applications.
 ## Endpoints
 ### Endpoint 1: User Registration
-- **description:** The User Registration endpoint allows new users to create an account in the Library API. This endpoint collects essential information to set up a user profile, granting access based on defined user roles (e.g., general user or admin).
+- **description:** This endpoint allows new users to create an account in the Library API. It collects essential information to set up a user profile and grants access based on defined roles (e.g., general user or admin).
 - **url:** users/register
 - **method:** POST
 ### Example Request
@@ -36,7 +36,7 @@ The Library API enables easy digital library management, allowing users to brows
 {
   "status": "fail",
   "data": {
-    "Message": "Email already taken! Try another one."
+    "Message": "Email already exists."
   }
 }
 ```
@@ -68,6 +68,15 @@ The Library API enables easy digital library management, allowing users to brows
 }
 ```
 **Error Response**
+- **Access Denied**
+ ```json
+{
+  "status": "fail",
+  "data": {
+    "Message": "Access Denied."
+  }
+}
+```
 - **Invalid Credentials**
 ```json
  {
@@ -112,16 +121,16 @@ The Library API enables easy digital library management, allowing users to brows
 {
   "status": "fail",
   "data": {
-    "Message": "Access Denied. Only admins can update books."
+    "Message": "Access Denied."
   }
 }
 ```
-- **Invalid Token**
+- **Invalid Token or outdated**
 ```json
  {
   "status": "fail",
   "data": {
-    "Message": "Expired token"
+    "Message": "Token is invalid or outdated"
   }
 }
 ```
@@ -161,7 +170,7 @@ The Library API enables easy digital library management, allowing users to brows
 {
   "status": "fail",
   "data": {
-    "Message": "Access Denied. Only admins can update books."
+    "Message": "Access Denied."
   }
 }
 ```
@@ -174,7 +183,7 @@ The Library API enables easy digital library management, allowing users to brows
   }
 }
  ```
-- **Invalid Token**
+- **Invalid Token or outdated**
 ```json
 {
   "status": "fail",
@@ -225,16 +234,16 @@ The Library API enables easy digital library management, allowing users to brows
 {
   "status": "fail",
   "data": {
-    "Message": "Access Denied. Only admins can delete books."
+    "Message": "Access Denied."
   }
 }
 ```
-- **Token Invalid**
+- **Token Invalid or outdated**
 ```json
 {
   "status": "fail",
   "data": {
-    "Message": "Expired token"
+    "Message": "Token is invalid or outdated"
   }
 }
 ```
@@ -293,7 +302,7 @@ The Library API enables easy digital library management, allowing users to brows
 }
 ```
 **Error Response**
-- **Token Invalid**
+- **Token Invalid or outdated**
 ```json
 {
   "status": "fail",
@@ -353,7 +362,7 @@ The Library API enables easy digital library management, allowing users to brows
 {
   "status": "fail",
   "data": {
-    "Message": "Access Denied. Only admins can add authors."
+    "Message": "Access Denied."
   }
 }
 ```
@@ -376,7 +385,7 @@ The Library API enables easy digital library management, allowing users to brows
   }
 }
 ```
-- **Database Connection Error**
+- **Database Error**
 ```json
 {
   "status": "fail",
@@ -385,7 +394,7 @@ The Library API enables easy digital library management, allowing users to brows
   }
 }
 ```
-- **Unexpected Server Error**
+- **Server Error**
 ```json
 {
   "status": "fail",
@@ -420,7 +429,7 @@ The Library API enables easy digital library management, allowing users to brows
 {
   "status": "fail",
   "data": {
-    "title": "Access Denied. Only admins can update books."
+    "title": "Access Denied."
   }
 }
 ```
@@ -453,7 +462,7 @@ The Library API enables easy digital library management, allowing users to brows
 }
 
 ```
-- **Database Connection Error**
+- **Database Error**
 ```json
 {
   "status": "fail",
@@ -487,7 +496,7 @@ The Library API enables easy digital library management, allowing users to brows
 {
   "status": "fail",
   "data": {
-    "Message": "Access Denied. Only admins can update books."
+    "Message": "Access Denied."
   }
 }
 ```
@@ -509,7 +518,7 @@ The Library API enables easy digital library management, allowing users to brows
   }
 }
 ```
-- **Database Connection Error**
+- **Database Error**
 ```json
 {
   "status": "fail",
@@ -547,7 +556,7 @@ The Library API enables easy digital library management, allowing users to brows
 }
 ```
 **Error Response**
-- **Token Invalid or Expired**
+- **Token Invalid or Outdated**
 ```json
 {
   "status": "fail",
@@ -563,7 +572,7 @@ The Library API enables easy digital library management, allowing users to brows
   "Message": "No authors found."
 }
 ```
-- **Database Connection Error**
+- **Database Error**
 ```json
 {
   "status": "fail",
@@ -597,7 +606,7 @@ The Library API enables easy digital library management, allowing users to brows
 {
   "status": "fail",
   "data": {
-    "title": "Access Denied. Only admins can delete users."
+    "title": "Access Denied."
   }
 }
 ```
@@ -622,10 +631,10 @@ The Library API enables easy digital library management, allowing users to brows
 - **Database Error**
 ```json
 {
-  "status": "fail",
-  "data": {
-    "Message": "Database connection error."
-  }
+    "status": "fail",
+    "data": {
+        "Message": "Error message from the database."
+    }
 }
 ```
  ### Endpoint 11: Users DisplayAll
@@ -663,7 +672,7 @@ The Library API enables easy digital library management, allowing users to brows
 {
   "status": "fail",
   "data": {
-    "Message": "Access Denied. Only admins can view users."
+    "Message": "Access Denied."
   }
 }
 ```
