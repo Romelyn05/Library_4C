@@ -139,7 +139,7 @@ The Library API provides a system for managing a digital library. It allows user
 {
     "status": "fail",
     "data": {
-        "Message": "Database error message here."
+        "Message": "Error message from the database."
     }
 }
 ```
@@ -388,10 +388,10 @@ The Library API provides a system for managing a digital library. It allows user
 - **Database Error**
 ```json
 {
-  "status": "fail",
-  "data": {
-    "Message": "Database connection error."
-  }
+    "status": "fail",
+    "data": {
+        "Message": "Error message from the database."
+    }
 }
 ```
 - **Server Error**
@@ -465,10 +465,10 @@ The Library API provides a system for managing a digital library. It allows user
 - **Database Error**
 ```json
 {
-  "status": "fail",
-  "data": {
-    "Message": "Database connection error."
-  }
+    "status": "fail",
+    "data": {
+        "Message": "Error message from the database."
+    }
 }
 ```
 ### Endpoint 9: Authors Delete
@@ -521,10 +521,10 @@ The Library API provides a system for managing a digital library. It allows user
 - **Database Error**
 ```json
 {
-  "status": "fail",
-  "data": {
-    "Message": "Database connection error."
-  }
+    "status": "fail",
+    "data": {
+        "Message": "Error message from the database."
+    }
 }
 ```
 ### Endpoint 10: Authors DisplayAllAuthors
@@ -575,10 +575,10 @@ The Library API provides a system for managing a digital library. It allows user
 - **Database Error**
 ```json
 {
-  "status": "fail",
-  "data": {
-    "Message": "Database connection error."
-  }
+    "status": "fail",
+    "data": {
+        "Message": "Error message from the database."
+    }
 }
 ```
 ### Endpoint 11: Users Delete
